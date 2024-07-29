@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { auth } from "../api/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
 
 type TInputForm = {
   email: string;
@@ -29,22 +32,38 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            type="text"
-            {...register("email", { required: "Email is required" })}
-          />
-          {errors.email && <span>{errors.email.message}</span>}
-          <input
-            type="text"
-            {...register("password", { required: "Password is required" })}
-          />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 1,
+              width: 300,
+            }}
+          >
+            <TextField
+              type="text"
+              label="Email"
+              {...register("email", { required: "Email is required" })}
+            />
+            {errors.email && <span>{errors.email.message}</span>}
+            <TextField
+              type="password"
+              label="Password"
+              {...register("password", { required: "Password is required" })}
+            />
+          </Box>
           {errors.password && <span>{errors.password.message}</span>}
           <p>{notice}</p>
-          <input type="submit" />
+          <Button type="submit" variant="contained">
+            Submit
+          </Button>
         </form>
+        <div>
+          don't have an account yet ? <Link to="/signup">signup</Link>
+        </div>
       </div>
     </div>
   );
