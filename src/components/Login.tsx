@@ -33,8 +33,8 @@ const Login = () => {
 
   return (
     <div className="container">
-      <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="wrapper">
+        <form onSubmit={handleSubmit(onSubmit)} className="form">
           <Box
             sx={{
               display: "flex",
